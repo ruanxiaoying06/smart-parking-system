@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧停车 · 我的订单</title>
+  <link rel="icon" href="./img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/user-list.css">
+</head>
+<body>
+  <div class="viewport">
+    <div class="phone-frame">
+      <div class="screen">
+
+        <!-- 顶部用户信息条 -->
+        <div class="userbar">
+          <div class="userbar__avatar">车</div>
+          <div class="userbar__info">
+            <div class="userbar__name">138****0001
+              <span class="badge badge-lock badge-sm">月卡会员</span>
+            </div>
+            <div class="userbar__balance text-xs text-tertiary">账户余额 <span class="tabular text-secondary">¥128.00</span></div>
+          </div>
+          <div class="userbar__setting" title="设置">⚙</div>
+        </div>
+
+        <main class="screen__main">
+          <!-- 状态筛选 Segmented -->
+          <div class="segmented" id="orderTabs">
+            <button class="active" data-status="all">全部</button>
+            <button data-status="reserved">预约中</button>
+            <button data-status="parking">在停</button>
+            <button data-status="paid">已完成</button>
+          </div>
+
+          <!-- 订单列表容器（JS 渲染） -->
+          <div id="orderList" class="order-list mt4"></div>
+        </main>
+
+        <!-- C 端底部 TabBar（3 项） -->
+        <nav class="tabbar">
+          <a href="home.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+            <span>首页</span>
+          </a>
+          <a href="user-list.html" class="active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <span>订单</span>
+          </a>
+          <a href="javascript:void(0)" onclick="App.toast('个人中心未在本次作业范围', 'info')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+            <span>我的</span>
+          </a>
+        </nav>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+  <script src="./js/common.js"></script>
+  <script src="./js/user-list.js"></script>
+</body>
+</html>

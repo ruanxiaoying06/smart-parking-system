@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧停车 · 预约确认与支付</title>
+  <link rel="icon" href="./img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/user-form.css">
+</head>
+<body>
+  <div class="viewport">
+    <div class="phone-frame">
+      <div class="screen">
+
+        <header class="topbar">
+          <span class="topbar__back" id="btnBack">‹</span>
+          <span class="topbar__title">预约确认</span>
+          <span class="topbar__action"></span>
+        </header>
+
+        <main class="screen__main">
+          <form id="reserveForm">
+            <!-- 车场 + 时段摘要 -->
+            <section class="card mb4">
+              <div class="text-sm text-tertiary">万象城停车场</div>
+              <div class="fw600 text-primary mt3" style="font-size:16px">09-08 10:00 – 13:00（3 小时）</div>
+              <div class="text-xs text-tertiary mt3">剩余车位 38 · 步行 8 分钟 · 新能源可享 0.9 折</div>
+            </section>
+
+            <!-- 车牌选择 / 新增 -->
+            <section class="card mb4">
+              <div class="fw600 mb3" style="font-size:15px">车牌</div>
+              <div class="field-row">
+                <select class="select" name="plateNo" id="plateSelect">
+                  <option value="京A·12345">京A·12345</option>
+                  <option value="沪B·6T82K">沪B·6T82K</option>
+                </select>
+                <button type="button" class="btn btn-md btn-secondary" id="btnAddPlate">+ 新增</button>
+              </div>
+              <div id="addPlateBox" style="display:none; margin-top:12px">
+                <div class="field" style="margin-bottom:12px">
+                  <input class="input" type="text" id="newPlate" name="newPlateNo" placeholder="如 京A·12345" maxlength="8" autocomplete="off">
+                  <span class="err-msg"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 1 21h22L12 2zm0 6 7 12H5l7-12zm-1 4v4h2v-4h-2zm0 5v2h2v-2h-2z"/></svg><span>车牌格式不正确</span></span>
+                </div>
+                <button type="button" class="btn btn-md btn-primary" id="btnConfirmPlate">保存车牌</button>
+              </div>
+            </section>
+
+            <!-- 预约金构成 -->
+            <section class="card mb4">
+              <div class="fw600 mb3" style="font-size:15px">费用说明</div>
+              <div class="cost-row"><span class="text-secondary">预估停车费</span><span class="tabular">¥22.00</span></div>
+              <div class="cost-row"><span class="text-secondary">预约金（20%，上限 ¥20）</span><span class="tabular">¥4.40</span></div>
+              <div class="divider"></div>
+              <div class="cost-row"><span class="fw600">应付预约金</span><span class="tabular fw700" id="depositAmount">¥4.40</span></div>
+              <p class="text-xs text-tertiary mt3">预约金入场后抵扣停车费；开始后 15 分钟未入场自动取消并释放车位，扣 50% 预约金。</p>
+            </section>
+
+            <!-- 支付方式 -->
+            <section class="card">
+              <div class="fw600 mb3" style="font-size:15px">支付方式</div>
+              <div class="pay-list" id="payList">
+                <label class="pay-item active">
+                  <input type="radio" name="payType" value="wechat" checked>
+                  <span class="pay-ico">微</span><span class="pay-name">微信支付</span><span class="pay-desc">推荐</span>
+                </label>
+                <label class="pay-item">
+                  <input type="radio" name="payType" value="alipay">
+                  <span class="pay-ico">支</span><span class="pay-name">支付宝</span><span class="pay-desc"></span>
+                </label>
+                <label class="pay-item">
+                  <input type="radio" name="payType" value="balance">
+                  <span class="pay-ico">余</span><span class="pay-name">余额</span><span class="pay-desc">¥128.00</span>
+                </label>
+              </div>
+            </section>
+          </form>
+        </main>
+
+        <div class="cta-bar">
+          <!-- 点击后调用 POST /api/orders/save，参数为表单序列化结果 -->
+          <button type="button" class="btn btn-xl btn-primary" id="btnPay">支付 ¥4.40 并预约</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+  <script src="./js/common.js"></script>
+  <script src="./js/user-form.js"></script>
+</body>
+</html>

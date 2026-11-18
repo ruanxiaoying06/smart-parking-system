@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧停车运营平台 · 计费规则</title>
+  <link rel="icon" href="./img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-side">
+      <div class="admin-logo">
+        <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#2563EB"/><path d="M11 24V13h8a4 4 0 0 1 0 8h-4v3z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><path d="M11 17h7a1.5 1.5 0 0 0 0-3h-7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg>
+        智慧停车
+      </div>
+      <nav class="admin-nav">
+        <a href="admin-dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>数据看板</a>
+        <a href="admin-slots.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 16V9h3a2 2 0 0 1 0 4h-3"/></svg>车位管理</a>
+        <a href="admin-pricing.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M15 9.5c0-1.4-1.3-2.5-3-2.5s-3 1-3 2.2c0 3 6 1.6 6 4.6 0 1.2-1.3 2.2-3 2.2s-3-1.1-3-2.5"/></svg>计费规则</a>
+        <a href="admin-orders.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>订单管理</a>
+        <a class="disabled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"/></svg>设置（无权限）</a>
+      </nav>
+    </aside>
+
+    <div class="admin-main">
+      <header class="admin-top">
+        <button class="switcher" id="parkSwitcher">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 10h16"/></svg>
+          <span id="curPark">万象城停车场</span>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="top-right">
+          <span class="bell" title="消息"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9a6 6 0 1 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="reddot"></span></span>
+          <span class="avatar">管</span>
+        </div>
+      </header>
+
+      <main class="admin-content">
+        <h1 class="page-title">计费规则配置</h1>
+
+        <form id="pricingForm">
+        <div class="pricing-grid">
+          <!-- 左：四段表单 -->
+          <div>
+            <!-- ① 计费基础 -->
+            <div class="form-section">
+              <div class="form-section__title">① 计费基础</div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="freeMinutes">免费时长（分钟）<span class="req">*</span></label>
+                  <input class="input" type="number" name="freeMinutes" id="freeMinutes" value="30" min="0">
+                  <span class="err-msg">请输入 ≥0 的整数</span>
+                </div>
+                <div class="field">
+                  <label for="firstHourPrice">首小时（元）<span class="req">*</span></label>
+                  <input class="input" type="number" name="firstHourPrice" id="firstHourPrice" value="10" min="0" step="0.5">
+                  <span class="err-msg">请输入 ≥0 的金额</span>
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="unitMinutes">计费单元（分钟）<span class="req">*</span></label>
+                  <input class="input" type="number" name="unitMinutes" id="unitMinutes" value="30" min="1">
+                  <span class="err-msg">请输入 ≥1 的整数</span>
+                </div>
+                <div class="field">
+                  <label for="unitPrice">每单元（元）<span class="req">*</span></label>
+                  <input class="input" type="number" name="unitPrice" id="unitPrice" value="3" min="0" step="0.5">
+                  <span class="err-msg">请输入 ≥0 的金额</span>
+                </div>
+              </div>
+              <div class="field" style="margin-bottom:0">
+                <label for="dailyCap">每日封顶（元）<span class="req">*</span></label>
+                <input class="input" type="number" name="dailyCap" id="dailyCap" value="60" min="0">
+                <span class="hint">不足一个计费单元按一个单元计；免费时长之后的首小时按首小时价计</span>
+                <span class="err-msg">请输入 ≥0 的金额</span>
+              </div>
+            </div>
+
+            <!-- ② 时段优惠 -->
+            <div class="form-section">
+              <div class="form-section__title">② 时段优惠</div>
+              <div class="flex center gap3 mb3">
+                <label class="switch">
+                  <input type="checkbox" name="nightEnabled" id="nightEnabled" checked>
+                  <span class="slider"></span>
+                </label>
+                <span class="text-sm text-secondary">启用夜间优惠（22:00 – 08:00 单次上限）</span>
+              </div>
+              <div class="field" style="margin-bottom:0">
+                <label for="nightCap">夜间单次上限（元）<span class="req">*</span></label>
+                <input class="input" type="number" name="nightCap" id="nightCap" value="15" min="0">
+                <span class="hint">夜间上限与每日封顶同时满足时取低者</span>
+              </div>
+            </div>
+
+            <!-- ③ 车型系数 -->
+            <div class="form-section">
+              <div class="form-section__title">③ 车型系数</div>
+              <table class="coef-tbl">
+                <thead><tr><th>车型</th><th>系数</th><th>说明</th></tr></thead>
+                <tbody>
+                  <tr><td>小型车</td><td><input class="input" type="number" name="coefSmall" value="1.0" step="0.1" min="0" style="width:90px;height:32px"></td><td class="text-tertiary text-xs">标准计费</td></tr>
+                  <tr><td>新能源</td><td><input class="input" type="number" name="coefNewEnergy" value="0.9" step="0.1" min="0" style="width:90px;height:32px"></td><td class="text-tertiary text-xs">9 折优惠</td></tr>
+                  <tr><td>大型车</td><td><input class="input" type="number" name="coefLarge" value="1.5" step="0.1" min="0" style="width:90px;height:32px"></td><td class="text-tertiary text-xs">含 SUV / 面包车</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- ④ 预约与违约 -->
+            <div class="form-section">
+              <div class="form-section__title">④ 预约与违约</div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="depositPercent">预约金比例（%）<span class="req">*</span></label>
+                  <input class="input" type="number" name="depositPercent" id="depositPercent" value="20" min="0" max="100">
+                </div>
+                <div class="field">
+                  <label for="depositCap">预约金上限（元）<span class="req">*</span></label>
+                  <input class="input" type="number" name="depositCap" id="depositCap" value="20" min="0">
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="keepMinutes">预约保留（分钟）<span class="req">*</span></label>
+                  <input class="input" type="number" name="keepMinutes" id="keepMinutes" value="15" min="0">
+                  <span class="hint">超时未入场自动取消并释放车位</span>
+                </div>
+                <div class="field">
+                  <label for="noshowFeePercent">未到场扣预约金（%）<span class="req">*</span></label>
+                  <input class="input" type="number" name="noshowFeePercent" id="noshowFeePercent" value="50" min="0" max="100">
+                </div>
+              </div>
+              <div class="field" style="margin-bottom:0">
+                <label for="cancelFeePercent">临期取消手续费（%）<span class="req">*</span></label>
+                <input class="input" type="number" name="cancelFeePercent" id="cancelFeePercent" value="20" min="0" max="100">
+                <span class="hint">开始前 ≥30 分钟取消免费全额退款；&lt;30 分钟收取手续费</span>
+              </div>
+            </div>
+
+            <div class="flex gap3 mt4">
+              <button type="button" class="btn btn-lg btn-secondary" id="btnReset">取消</button>
+              <!-- 点击后调用 POST /api/admin/pricing/save，参数为表单序列化结果 -->
+              <button type="button" class="btn btn-lg btn-primary" id="btnSavePricing">保存并应用</button>
+            </div>
+          </div>
+
+          <!-- 右：常驻费用试算器 -->
+          <div class="calc-card">
+            <div class="form-section__title">费用试算器</div>
+            <div class="field">
+              <label for="calcStart">入场时间</label>
+              <input class="input" type="datetime-local" id="calcStart" value="2026-09-08T09:30">
+            </div>
+            <div class="field">
+              <label for="calcEnd">出场时间</label>
+              <input class="input" type="datetime-local" id="calcEnd" value="2026-09-08T13:00">
+            </div>
+            <div class="field">
+              <label for="calcCarType">车型</label>
+              <select class="select" id="calcCarType">
+                <option value="1">小型车 ×1.0</option>
+                <option value="0.9">新能源 ×0.9</option>
+                <option value="1.5">大型车 ×1.5</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-md btn-primary" id="btnCalc" style="width:100%">试算</button>
+
+            <div id="calcResult" class="mt4">
+              <div class="calc-row"><span class="text-tertiary">免费时长 30 分钟</span><span class="tabular">¥0.00</span></div>
+              <div class="calc-row"><span class="text-tertiary">首小时</span><span class="tabular">¥10.00</span></div>
+              <div class="calc-row"><span class="text-tertiary">后续 4 × ¥3.00</span><span class="tabular">¥12.00</span></div>
+              <div class="calc-row"><span class="text-tertiary">车型系数</span><span class="tabular">¥0.00</span></div>
+              <div class="calc-total">
+                <span class="fw600">合计</span>
+                <span class="amt">¥22.00</span>
+              </div>
+              <div class="mt3" id="calcCapNote" style="display:none"><span class="cap-hit">已达封顶</span> <span class="text-xs text-tertiary" id="calcCapText"></span></div>
+            </div>
+          </div>
+        </div>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+  <script src="./js/common.js"></script>
+  <script src="./js/admin-pricing.js"></script>
+</body>
+</html>

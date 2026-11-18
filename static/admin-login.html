@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧停车运营平台 · 登录</title>
+  <link rel="icon" href="./img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body>
+  <div class="login-split">
+    <!-- 左侧品牌视觉区 -->
+    <div class="login-brand">
+      <div class="flex center gap3">
+        <svg width="44" height="44" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#fff"/><path d="M11 24V13h8a4 4 0 0 1 0 8h-4v3z" fill="none" stroke="#2563EB" stroke-width="2.2" stroke-linejoin="round"/><path d="M11 17h7a1.5 1.5 0 0 0 0-3h-7" fill="none" stroke="#2563EB" stroke-width="2.2" stroke-linejoin="round"/></svg>
+        <span style="font-size:20px;font-weight:700">智慧停车运营平台</span>
+      </div>
+      <h1>让每一车位<br>都被看见</h1>
+      <p>车位预约 · 智能计费 · 异常兜底 —— 出发前知道有位，出场账单算得清。</p>
+      <svg class="deco" viewBox="0 0 200 200" fill="none" stroke="#fff" stroke-width="3">
+        <rect x="30" y="40" width="140" height="120" rx="16"/>
+        <path d="M60 160v-60M140 160v-60M60 100h80"/>
+        <circle cx="100" cy="130" r="6"/>
+      </svg>
+    </div>
+
+    <!-- 右侧登录卡 -->
+    <div class="login-panel">
+      <form class="login-card" id="adminLoginForm" novalidate>
+        <h2 style="font-size:24px;font-weight:700;color:var(--n-900)">管理员登录</h2>
+        <p class="text-sm text-tertiary mt3" style="margin-bottom:24px">车场运营 / 平台超级管理员专用</p>
+
+        <div class="field">
+          <label for="accAccount">账号<span class="req">*</span></label>
+          <input class="input" type="text" name="account" id="accAccount" placeholder="请输入管理员账号" autocomplete="username">
+          <span class="err-msg"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 1 21h22L12 2zm0 6 7 12H5l7-12zm-1 4v4h2v-4h-2zm0 5v2h2v-2h-2z"/></svg><span>请输入账号</span></span>
+        </div>
+        <div class="field">
+          <label for="accPwd">密码<span class="req">*</span></label>
+          <input class="input" type="password" name="password" id="accPwd" placeholder="请输入密码" autocomplete="current-password">
+          <span class="err-msg"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 1 21h22L12 2zm0 6 7 12H5l7-12zm-1 4v4h2v-4h-2zm0 5v2h2v-2h-2z"/></svg><span>请输入密码</span></span>
+        </div>
+        <div class="field">
+          <label for="accCaptcha">图形验证码<span class="req">*</span></label>
+          <div class="field-row">
+            <input class="input" type="text" name="captcha" id="accCaptcha" placeholder="4 位验证码" maxlength="4" style="flex:1">
+            <!-- 点击刷新验证码（演示为前端随机串） -->
+            <span class="captcha-img" id="captchaImg" title="点击刷新">A7X9</span>
+          </div>
+          <span class="err-msg"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 1 21h22L12 2zm0 6 7 12H5l7-12zm-1 4v4h2v-4h-2zm0 5v2h2v-2h-2z"/></svg><span>验证码错误</span></span>
+        </div>
+
+        <div class="field field--row" style="flex-direction:row;align-items:center;justify-content:space-between">
+          <label class="checkbox" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--n-500);cursor:pointer">
+            <input type="checkbox" name="remember" checked style="width:16px;height:16px;accent-color:var(--blue-600)"> 记住我
+          </label>
+          <a href="javascript:void(0)" class="text-blue text-sm">忘记密码</a>
+        </div>
+
+        <!-- 点击后调用 POST /api/admin/login，参数为表单序列化结果 -->
+        <button type="button" class="btn btn-xl btn-primary" id="btnAdminLogin">登 录</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+  <script src="./js/common.js"></script>
+  <script src="./js/admin-login.js"></script>
+</body>
+</html>

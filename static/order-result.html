@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧停车 · 预约结果</title>
+  <link rel="icon" href="./img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/mobile-pages.css">
+</head>
+<body>
+  <div class="viewport">
+    <div class="phone-frame">
+      <div class="screen">
+
+        <header class="topbar">
+          <span class="topbar__back" onclick="location.href='home.html'">‹</span>
+          <span class="topbar__title">预约结果</span>
+          <span class="topbar__action"></span>
+        </header>
+
+        <main class="screen__main">
+          <!-- ===== 支付成功态 ===== -->
+          <div class="result-hero">
+            <div class="result-hero__ok">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg>
+            </div>
+            <div class="result-hero__title">预约成功</div>
+            <div class="result-hero__sub">¥4.40 已支付 · 入场后抵扣停车费</div>
+          </div>
+
+          <!-- 预约码 -->
+          <div class="reserve-code">
+            <div class="reserve-code__label">入场预约码</div>
+            <div class="reserve-code__num tabular">824 619</div>
+          </div>
+
+          <!-- 入场倒计时 -->
+          <div class="countdown" id="countdown">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <span>车位保留至 <span id="keepUntil">15:00</span>，剩余 </span>
+            <span class="tabular" id="cdTime">14:32</span>
+          </div>
+
+          <!-- 保留规则 -->
+          <div class="card mt4">
+            <div class="fw600 mb3" style="font-size:15px">保留规则</div>
+            <ul class="rule-list">
+              <li>预约开始后 15 分钟未入场，自动取消并释放车位</li>
+              <li>未到场将扣 50% 预约金（¥2.20）</li>
+              <li>开始前 ≥30 分钟取消免费全额退款</li>
+              <li>开始前 &lt;30 分钟取消，收取 20% 手续费</li>
+            </ul>
+          </div>
+
+          <!-- 双出口 -->
+          <div class="flex gap3 mt6">
+            <button type="button" class="btn btn-lg btn-secondary" style="flex:1" id="btnBackHome">返回首页</button>
+            <button type="button" class="btn btn-lg btn-primary" style="flex:1" id="btnViewOrder">查看订单</button>
+          </div>
+
+          <!-- ===== 支付失败态（对比展示） ===== -->
+          <div class="section-label">支付失败时展示</div>
+          <div class="result-fail">
+            <div class="fail-ico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+            </div>
+            <div style="text-align:center;font-size:16px;font-weight:600;color:var(--n-900)">支付失败</div>
+            <div style="text-align:center;font-size:13px;color:var(--text-tertiary);margin-top:6px">余额不足（PAY_2003）</div>
+            <div class="flex gap3 mt4">
+              <button type="button" class="btn btn-md btn-secondary" style="flex:1" id="btnChangePay">更换支付方式</button>
+              <button type="button" class="btn btn-md btn-primary" style="flex:1" id="btnRetryPay">重新支付</button>
+            </div>
+          </div>
+        </main>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+  <script src="./js/common.js"></script>
+  <script src="./js/order-result.js"></script>
+</body>
+</html>

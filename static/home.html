@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧停车 · 首页找车位</title>
+  <link rel="icon" href="./img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/mobile-pages.css">
+</head>
+<body>
+  <div class="viewport">
+    <div class="phone-frame">
+      <div class="screen">
+
+        <header class="topbar">
+          <span class="topbar__title" style="text-align:left">找车位</span>
+          <span class="topbar__action" id="linkOrders">我的订单</span>
+        </header>
+
+        <main class="screen__main">
+          <!-- 定位 + 地图占位入口 -->
+          <div class="locbar">
+            <span class="locbar__pos">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              当前位置 · 朝阳大悦城
+            </span>
+            <!-- 点击后跳转第三方地图（演示占位） -->
+            <button type="button" class="locbar__map" id="btnMap" title="地图">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg>
+            </button>
+          </div>
+
+          <!-- 搜索框 -->
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input type="text" name="keyword" id="searchInput" placeholder="搜索车场 / 目的地">
+          </div>
+
+          <!-- 筛选 chips -->
+          <div class="chips" id="filterChips">
+            <button class="chip active" data-f="all">全部</button>
+            <button class="chip" data-f="near">距离最近</button>
+            <button class="chip" data-f="cheap">价格最低</button>
+            <button class="chip" data-f="free">余位最多</button>
+            <button class="chip" data-f="month">月卡可用</button>
+          </div>
+
+          <!-- 车场卡片列表（JS 渲染，含骨架屏 / 空状态） -->
+          <div class="lot-list" id="lotList">
+            <div class="card skel-card"><div class="skel-line" style="width:60%"></div><div class="skel-line" style="width:80%"></div><div class="skel-line" style="width:40%"></div></div>
+            <div class="card skel-card"><div class="skel-line" style="width:50%"></div><div class="skel-line" style="width:70%"></div></div>
+          </div>
+        </main>
+
+        <!-- C 端底部 TabBar -->
+        <nav class="tabbar">
+          <a href="home.html" class="active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+            <span>首页</span>
+          </a>
+          <a href="user-list.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <span>订单</span>
+          </a>
+          <a href="javascript:void(0)" onclick="App.toast('个人中心未在本次作业范围', 'info')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+            <span>我的</span>
+          </a>
+        </nav>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+  <script src="./js/common.js"></script>
+  <script src="./js/home.js"></script>
+</body>
+</html>

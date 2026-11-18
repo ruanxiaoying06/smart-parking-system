@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧停车运营平台 · 车位管理</title>
+  <link rel="icon" href="./img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-side">
+      <div class="admin-logo">
+        <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#2563EB"/><path d="M11 24V13h8a4 4 0 0 1 0 8h-4v3z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><path d="M11 17h7a1.5 1.5 0 0 0 0-3h-7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg>
+        智慧停车
+      </div>
+      <nav class="admin-nav">
+        <a href="admin-dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>数据看板</a>
+        <a href="admin-slots.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 16V9h3a2 2 0 0 1 0 4h-3"/></svg>车位管理</a>
+        <a href="admin-pricing.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M15 9.5c0-1.4-1.3-2.5-3-2.5s-3 1-3 2.2c0 3 6 1.6 6 4.6 0 1.2-1.3 2.2-3 2.2s-3-1.1-3-2.5"/></svg>计费规则</a>
+        <a href="admin-orders.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>订单管理</a>
+        <a class="disabled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"/></svg>设置（无权限）</a>
+      </nav>
+    </aside>
+
+    <div class="admin-main">
+      <header class="admin-top">
+        <button class="switcher" id="parkSwitcher">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 10h16"/></svg>
+          <span id="curPark">万象城停车场</span>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="top-right">
+          <span class="bell" title="消息"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9a6 6 0 1 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="reddot"></span></span>
+          <span class="avatar">管</span>
+        </div>
+      </header>
+
+      <main class="admin-content">
+        <h1 class="page-title">车位管理</h1>
+
+        <div class="slots-grid2">
+          <!-- 分区 / 楼层树 -->
+          <div class="tree" id="areaTree">
+            <div class="tree__item active" data-area="B1-A">▾ B1 层 · A区（48）</div>
+            <div class="tree__item tree__sub" data-area="B1-B">B1 层 · B区（52）</div>
+            <div class="tree__item" data-area="1F">▸ 1F 层（60）</div>
+            <div class="tree__item" data-area="2F">▸ 2F 层（40）</div>
+          </div>
+
+          <!-- 工具条 + 图例 + 矩阵 -->
+          <div>
+            <div class="card" style="padding:12px 16px">
+              <div class="flex center gap3" style="flex-wrap:wrap">
+                <select class="select" id="statusFilter" style="width:140px;height:32px">
+                  <option value="all">全部状态</option>
+                  <option value="free">空闲</option>
+                  <option value="reserved">已预约</option>
+                  <option value="occupied">占用中</option>
+                  <option value="maintain">维保中</option>
+                  <option value="locked">已锁定</option>
+                  <option value="full">已满场</option>
+                </select>
+                <input class="input" id="slotSearch" placeholder="搜索车位号，如 A-12" style="width:180px;height:32px">
+                <div class="legend" style="margin-left:auto">
+                  <span class="legend__item"><span class="legend__sw" style="background:var(--slot-free-fill);border:1px solid var(--slot-free-border)"></span>空</span>
+                  <span class="legend__item"><span class="legend__sw" style="background:var(--slot-reserved-fill);border:1px solid var(--slot-reserved-border)"></span>预</span>
+                  <span class="legend__item"><span class="legend__sw" style="background:var(--slot-occupied-fill);border:1px solid var(--slot-occupied-border)"></span>占</span>
+                  <span class="legend__item"><span class="legend__sw" style="background:var(--slot-maintain-fill);border:1px solid var(--slot-maintain-border)"></span>维</span>
+                  <span class="legend__item"><span class="legend__sw" style="background:var(--slot-locked-fill);border:1px solid var(--slot-locked-border)"></span>锁</span>
+                  <span class="legend__item"><span class="legend__sw" style="background:var(--slot-full-fill)"></span>满</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 车位矩阵（JS 渲染，颜色 + 角标双编码） -->
+            <div class="card" style="margin-top:12px;padding:16px">
+              <div class="slot-matrix" id="slotMatrix"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- 吸底批量操作条 -->
+  <div class="batch-bar" id="batchBar">
+    <span class="text-sm text-secondary">已选 <b id="selCount" class="text-blue">0</b> 个车位</span>
+    <div class="flex gap3">
+      <button class="btn btn-md btn-secondary" data-op="free">置空闲</button>
+      <button class="btn btn-md btn-secondary" data-op="maintain">置维保</button>
+      <button class="btn btn-md btn-secondary" data-op="locked">置锁定</button>
+      <button class="btn btn-md btn-text" data-op="cancel">取消</button>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+  <script src="./js/common.js"></script>
+  <script src="./js/admin-slots.js"></script>
+</body>
+</html>

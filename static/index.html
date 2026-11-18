@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧停车 · 登录/注册</title>
+  <link rel="icon" href="./img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+  <div class="viewport">
+    <div class="phone-frame">
+      <div class="screen">
+
+        <!-- 品牌视觉区 -->
+        <header class="brand">
+          <div class="brand__logo" aria-hidden="true">
+            <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="8" y="10" width="32" height="30" rx="6"/>
+              <path d="M16 38V24h16v14"/>
+              <path d="M16 30h16"/>
+              <text x="24" y="28" font-size="11" fill="#fff" stroke="none" text-anchor="middle" font-family="sans-serif" font-weight="700">P</text>
+            </svg>
+          </div>
+          <h1 class="brand__title">智慧停车</h1>
+          <p class="brand__sub">出发前知道有位 · 出场账单算得清</p>
+        </header>
+
+        <main class="screen__main">
+          <section class="card card--p5">
+            <!-- 登录 / 注册 切换 -->
+            <div class="segmented" id="authTabs" role="tablist">
+              <button class="active" data-tab="login" role="tab">登录</button>
+              <button data-tab="register" role="tab">注册</button>
+            </div>
+
+            <!-- ===== 登录面板 ===== -->
+            <form id="loginForm" class="auth-form" novalidate>
+              <div class="field">
+                <label for="loginPhone">手机号<span class="req">*</span></label>
+                <input class="input" type="tel" name="phone" id="loginPhone"
+                       placeholder="请输入手机号" maxlength="11" autocomplete="username">
+                <span class="err-msg"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 1 21h22L12 2zm0 6 7 12H5l7-12zm-1 4v4h2v-4h-2zm0 5v2h2v-2h-2z"/></svg><span>手机号格式不正确</span></span>
+              </div>
+              <div class="field">
+                <label for="loginPwd">密码<span class="req">*</span></label>
+                <input class="input" type="password" name="password" id="loginPwd"
+                       placeholder="请输入密码" autocomplete="current-password">
+                <span class="err-msg"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 1 21h22L12 2zm0 6 7 12H5l7-12zm-1 4v4h2v-4h-2zm0 5v2h2v-2h-2z"/></svg><span>请输入密码</span></span>
+              </div>
+              <div class="field field--row">
+                <label class="checkbox"><input type="checkbox" name="remember" checked> 记住我</label>
+                <a href="javascript:void(0)" class="text-blue text-sm">忘记密码</a>
+              </div>
+              <!-- 点击后调用 POST /api/login，参数为表单序列化结果 -->
+              <button type="button" class="btn btn-xl btn-primary" id="btnLogin">登录</button>
+              <p class="hint center mt3">未注册手机号验证后将自动创建账号</p>
+            </form>
+
+            <!-- ===== 注册面板 ===== -->
+            <form id="registerForm" class="auth-form" novalidate style="display:none">
+              <div class="field">
+                <label for="regPhone">手机号<span class="req">*</span></label>
+                <input class="input" type="tel" name="phone" id="regPhone"
+                       placeholder="请输入手机号" maxlength="11" autocomplete="username">
+                <span class="err-msg"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 1 21h22L12 2zm0 6 7 12H5l7-12zm-1 4v4h2v-4h-2zm0 5v2h2v-2h-2z"/></svg><span>手机号格式不正确</span></span>
+              </div>
+              <div class="field">
+                <label for="regCode">短信验证码<span class="req">*</span></label>
+                <div class="field-row">
+                  <input class="input" type="text" name="smsCode" id="regCode"
+                         placeholder="6 位验证码" maxlength="6" inputmode="numeric">
+                  <!-- 点击后调用 POST /api/sms/send，参数为 { phone } -->
+                  <button type="button" class="btn btn-md btn-secondary" id="btnSendCode">获取验证码</button>
+                </div>
+                <span class="err-msg"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 1 21h22L12 2zm0 6 7 12H5l7-12zm-1 4v4h2v-4h-2zm0 5v2h2v-2h-2z"/></svg><span>请输入 6 位验证码</span></span>
+              </div>
+              <div class="field">
+                <label for="regPwd">设置密码<span class="req">*</span></label>
+                <input class="input" type="password" name="password" id="regPwd"
+                       placeholder="6–20 位字母数字组合" autocomplete="new-password">
+                <span class="err-msg"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 1 21h22L12 2zm0 6 7 12H5l7-12zm-1 4v4h2v-4h-2zm0 5v2h2v-2h-2z"/></svg><span>密码为 6–20 位</span></span>
+              </div>
+              <div class="field">
+                <label class="checkbox"><input type="checkbox" name="agreement" id="regAgree"> 我已阅读并同意《用户协议》《隐私政策》</label>
+                <span class="err-msg"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 1 21h22L12 2zm0 6 7 12H5l7-12zm-1 4v4h2v-4h-2zm0 5v2h2v-2h-2z"/></svg><span>请先同意用户协议与隐私政策</span></span>
+              </div>
+              <!-- 点击后调用 POST /api/register，参数为表单序列化结果 -->
+              <button type="button" class="btn btn-xl btn-primary" id="btnRegister">注册并登录</button>
+            </form>
+
+            <div class="divider"></div>
+            <p class="text-xs text-tertiary center" style="text-align:center">其他方式登录</p>
+            <div class="third-party">
+              <button type="button" class="tp-btn" id="btnWechat" title="微信登录">微</button>
+              <button type="button" class="tp-btn" id="btnAlipay" title="支付宝登录">支</button>
+              <button type="button" class="tp-btn" id="btnApple"  title="Apple 登录">苹</button>
+            </div>
+          </section>
+        </main>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+  <script src="./js/common.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+</html>

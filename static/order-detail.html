@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧停车 · 订单详情</title>
+  <link rel="icon" href="./img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/mobile-pages.css">
+</head>
+<body>
+  <div class="viewport">
+    <div class="phone-frame">
+      <div class="screen">
+
+        <header class="topbar">
+          <span class="topbar__back" onclick="location.href='user-list.html'">‹</span>
+          <span class="topbar__title">订单详情</span>
+          <span class="topbar__action"></span>
+        </header>
+
+        <main class="screen__main">
+          <!-- 在场计时卡 -->
+          <section class="stay-card">
+            <div class="stay-card__label">
+              <span class="dot-live"></span>停车中 · 万象城停车场 B1-A12
+            </div>
+            <div class="stay-card__time tabular" id="stayTime">02:14:30</div>
+            <div class="stay-card__meta">
+              <span>入场 10:24</span><span>预计费用 ¥33.00</span>
+            </div>
+          </section>
+
+          <!-- 车辆信息 -->
+          <section class="card mt4">
+            <div class="car-row"><span>车牌</span><span class="tabular">京A·12345（新能源 ×0.9）</span></div>
+            <div class="car-row"><span>入场时间</span><span class="tabular">2026-09-08 10:24</span></div>
+            <div class="car-row"><span>订单号</span><span class="tabular">ORD20260908001</span></div>
+          </section>
+
+          <!-- 计费明细时间轴 -->
+          <section class="card mt4">
+            <div class="fw600 mb3" style="font-size:15px">计费明细</div>
+            <div class="timeline">
+              <div class="tl-item tl-item--free">
+                <div class="tl-item__body">
+                  <div class="tl-item__time tabular">10:24 – 10:54</div>
+                  <div class="tl-item__desc">免费时长 30 分钟</div>
+                </div>
+                <span class="tl-item__amt tabular">¥0.00</span>
+              </div>
+              <div class="tl-item">
+                <div class="tl-item__body">
+                  <div class="tl-item__time tabular">10:54 – 11:54</div>
+                  <div class="tl-item__desc">首小时</div>
+                </div>
+                <span class="tl-item__amt tabular">¥10.00</span>
+              </div>
+              <div class="tl-item">
+                <div class="tl-item__body">
+                  <div class="tl-item__time tabular">11:54 – 12:54</div>
+                  <div class="tl-item__desc">后续 2 × ¥3.00 / 30 分钟</div>
+                </div>
+                <span class="tl-item__amt tabular">¥6.00</span>
+              </div>
+              <div class="tl-item tl-item--off">
+                <div class="tl-item__body">
+                  <div class="tl-item__time">车型系数 · 新能源 ×0.9</div>
+                  <div class="tl-item__desc">16.00 × 0.1 优惠</div>
+                </div>
+                <span class="tl-item__amt tabular" style="color:var(--success)">−¥1.60</span>
+              </div>
+              <div class="tl-item tl-item--cap">
+                <div class="tl-item__body">
+                  <div class="tl-item__time">日封顶 / 夜间封顶</div>
+                  <div class="tl-item__desc">日封顶 ¥60.00 · 夜间 22:00–08:00 上限 ¥15.00，均未触发</div>
+                </div>
+                <span class="tl-item__amt tabular">¥0.00</span>
+              </div>
+              <div class="tl-cap"><span>预约金抵扣</span><span class="tabular" style="color:var(--success)">−¥4.40</span></div>
+            </div>
+            <div class="tl-total">
+              <span class="tl-total__label">还需支付</span>
+              <span class="tl-total__amt tabular">¥10.00</span>
+            </div>
+          </section>
+
+          <!-- 超时离场补缴提示 -->
+          <div class="notice-bar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+            支付完成后 15 分钟内免费出场，超时按后续费率补收
+          </div>
+        </main>
+
+        <div class="cta-bar">
+          <div class="pay-tip">开通无感支付，出场自动扣费</div>
+          <!-- 点击后调用 POST /api/orders/pay，参数为 { orderId, payType } -->
+          <button type="button" class="btn btn-xl btn-primary" id="btnPayNow">立即支付 ¥10.00</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+  <script src="./js/common.js"></script>
+  <script src="./js/order-detail.js"></script>
+</body>
+</html>

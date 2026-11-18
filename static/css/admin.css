@@ -1,0 +1,146 @@
+/* admin.css —— 管理后台 5 页共享样式（admin-login / admin-dashboard / admin-slots / admin-pricing / admin-orders），补充 common.css */
+
+/* ============ 布局：左侧导航 240 + 顶栏 56 + 内容区 ============ */
+.admin-layout { display: flex; min-height: 100vh; background: var(--bg-canvas); }
+.admin-side {
+  width: 240px; flex-shrink: 0; background: #fff;
+  border-right: 1px solid var(--border-subtle);
+  display: flex; flex-direction: column; padding: 16px 12px;
+  position: sticky; top: 0; height: 100vh;
+}
+.admin-logo { display: flex; align-items: center; gap: 10px; padding: 8px 12px 20px; font-size: 18px; font-weight: 700; color: var(--n-900); }
+.admin-logo svg { width: 28px; height: 28px; }
+.admin-nav { display: flex; flex-direction: column; gap: 4px; }
+.admin-nav a {
+  display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 12px;
+  border-radius: 8px; color: var(--n-500); font-size: 14px; cursor: pointer;
+}
+.admin-nav a:hover { background: var(--bg-subtle); }
+.admin-nav a.active { background: var(--blue-50); color: var(--blue-700); font-weight: 600; }
+.admin-nav a svg { width: 20px; height: 20px; flex-shrink: 0; }
+.admin-nav .disabled { color: var(--text-disabled); cursor: not-allowed; }
+.admin-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.admin-top {
+  height: 56px; background: #fff; border-bottom: 1px solid var(--border-subtle);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; position: sticky; top: 0; z-index: 20;
+}
+.switcher {
+  display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 12px;
+  border: 1px solid var(--border-default); border-radius: 8px; background: #fff;
+  font-size: 14px; cursor: pointer; color: var(--n-700); font-family: var(--font-sans);
+}
+.switcher svg { width: 16px; height: 16px; color: var(--blue-600); }
+.top-right { display: flex; align-items: center; gap: 16px; }
+.bell { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--n-500); position: relative; }
+.bell:hover { background: var(--bg-subtle); }
+.bell .reddot { position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--danger); }
+.avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--blue-600); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; }
+.admin-content { padding: 24px; flex: 1; min-width: 0; }
+.page-title { font-size: 20px; font-weight: 700; color: var(--n-900); margin-bottom: 16px; }
+
+/* ============ 指标卡（紧凑） ============ */
+.metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.metric-card { background: #fff; border-radius: 12px; box-shadow: var(--elevation-1); padding: 16px; }
+.metric-card__label { font-size: 11px; font-weight: 600; color: var(--text-tertiary); display: flex; align-items: center; justify-content: space-between; }
+.metric-card__value { font-size: 24px; font-weight: 700; color: var(--n-900); margin-top: 6px; font-family: var(--font-mono); }
+.metric-card__delta { font-size: 12px; margin-top: 4px; }
+
+/* ============ 图表区 ============ */
+.chart-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-top: 16px; }
+.chart-card { background: #fff; border-radius: 12px; box-shadow: var(--elevation-1); padding: 16px; }
+.chart-card__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.chart-card__title { font-size: 15px; font-weight: 600; color: var(--n-700); }
+.bar-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 12px; color: var(--n-500); }
+.bar-row .bar-track { flex: 1; height: 10px; background: var(--n-50); border-radius: 999px; overflow: hidden; }
+.bar-row .bar-fill { height: 100%; border-radius: 999px; background: var(--blue-600); }
+.bar-row .bar-val { width: 44px; text-align: right; font-family: var(--font-mono); }
+
+/* ============ 表格（紧凑：表头44 / 行40） ============ */
+.tbl-wrap { background: #fff; border-radius: 12px; box-shadow: var(--elevation-1); overflow: hidden; margin-top: 16px; }
+.tbl { width: 100%; border-collapse: collapse; background: #fff; }
+.tbl th { height: 44px; background: var(--bg-subtle); font-size: 13px; font-weight: 600; color: var(--n-500); text-align: left; padding: 0 12px; border-bottom: 1px solid var(--border-subtle); white-space: nowrap; }
+.tbl td { height: 40px; padding: 0 12px; font-size: 13px; color: var(--n-600); border-bottom: 1px solid var(--border-subtle); white-space: nowrap; }
+.tbl tbody tr:hover td { background: var(--bg-subtle); }
+.tbl tbody tr.selected td { background: var(--blue-50); }
+.tbl input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--blue-600); cursor: pointer; }
+
+/* ============ 吸底批量操作栏 ============ */
+.batch-bar {
+  position: fixed; bottom: 0; left: 240px; right: 0; height: 56px; background: #fff;
+  box-shadow: var(--elevation-2); display: none; align-items: center; justify-content: space-between;
+  padding: 0 24px; z-index: 30;
+}
+.batch-bar.show { display: flex; }
+
+/* ============ M3 车位矩阵 ============ */
+.slots-grid2 { display: grid; grid-template-columns: 240px 1fr; gap: 16px; align-items: start; }
+.tree { background: #fff; border-radius: 12px; box-shadow: var(--elevation-1); padding: 12px; }
+.tree__item { display: flex; align-items: center; gap: 6px; padding: 8px 10px; border-radius: 6px; font-size: 13px; color: var(--n-600); cursor: pointer; }
+.tree__item:hover { background: var(--bg-subtle); }
+.tree__item.active { background: var(--blue-50); color: var(--blue-700); font-weight: 600; }
+.tree__sub { padding-left: 22px; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.legend__item { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--n-500); }
+.legend__sw { width: 12px; height: 12px; border-radius: 3px; }
+.slot-matrix { display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 8px; margin-top: 12px; }
+.slot-block {
+  height: 44px; border-radius: 8px; border: 1px solid;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; position: relative; font-size: 12px; font-family: var(--font-mono);
+  transition: transform var(--dur-fast);
+}
+.slot-block:hover { transform: translateY(-1px); }
+.slot-block.selected { outline: 2px solid var(--blue-600); outline-offset: 1px; }
+.slot-block .tag { position: absolute; right: 2px; bottom: 2px; font-size: 9px; font-weight: 700; color: #fff; border-radius: 3px; padding: 0 3px; line-height: 13px; font-family: var(--font-sans); }
+.slot-free { background: var(--slot-free-fill); border-color: var(--slot-free-border); color: var(--slot-free-text); }
+.slot-reserved { background: var(--slot-reserved-fill); border-color: var(--slot-reserved-border); color: var(--slot-reserved-text); }
+.slot-occupied { background: var(--slot-occupied-fill); border-color: var(--slot-occupied-border); color: var(--slot-occupied-text); }
+.slot-maintain { background: var(--slot-maintain-fill); border-color: var(--slot-maintain-border); color: var(--slot-maintain-text); }
+.slot-locked { background: var(--slot-locked-fill); border-color: var(--slot-locked-border); color: var(--slot-locked-text); }
+.slot-full { background: var(--slot-full-fill); border-color: var(--slot-full-border); color: var(--slot-full-text); }
+
+/* ============ M4 计费规则（左表单右试算器） ============ */
+.pricing-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; align-items: start; }
+.form-section { background: #fff; border-radius: 12px; box-shadow: var(--elevation-1); padding: 20px; }
+.form-section + .form-section { margin-top: 16px; }
+.form-section__title { font-size: 15px; font-weight: 600; color: var(--n-700); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.calc-card { background: #fff; border-radius: 12px; box-shadow: var(--elevation-1); padding: 20px; position: sticky; top: 80px; }
+.calc-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 13px; color: var(--n-600); }
+.calc-total { border-top: 1px solid var(--border-subtle); margin-top: 8px; padding-top: 12px; display: flex; justify-content: space-between; align-items: center; }
+.calc-total .amt { font-size: 24px; font-weight: 700; color: var(--n-900); font-family: var(--font-mono); }
+.cap-hit { background: var(--n-900); color: #fff; border-radius: 6px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+.coef-tbl { width: 100%; border-collapse: collapse; }
+.coef-tbl th { text-align: left; font-size: 12px; color: var(--n-500); font-weight: 600; padding: 6px 0; border-bottom: 1px solid var(--border-subtle); }
+.coef-tbl td { padding: 8px 0; font-size: 13px; color: var(--n-600); border-bottom: 1px solid var(--border-subtle); }
+
+/* ============ M1 后台登录（左右分栏） ============ */
+.login-split { min-height: 100vh; display: flex; }
+.login-brand {
+  flex: 3; color: #fff; display: flex; flex-direction: column; justify-content: center;
+  padding: 64px; background: linear-gradient(135deg, #1E40AF 0%, #2563EB 55%, #3B82F6 100%);
+  position: relative; overflow: hidden;
+}
+.login-brand h1 { font-size: 32px; font-weight: 700; margin-top: 24px; }
+.login-brand p { font-size: 15px; opacity: .85; margin-top: 12px; max-width: 420px; }
+.login-brand .deco { position: absolute; right: -60px; bottom: -60px; width: 360px; height: 360px; opacity: .12; }
+.login-panel { flex: 2; display: flex; align-items: center; justify-content: center; background: #fff; padding: 32px; }
+.login-card { width: 100%; max-width: 360px; }
+.captcha-img { height: 36px; min-width: 96px; border-radius: 8px; background: var(--n-50); border: 1px solid var(--border-default); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; letter-spacing: 3px; color: var(--n-600); cursor: pointer; user-select: none; }
+
+/* ============ 响应式 ≤768：不散架 ============ */
+@media (max-width: 768px) {
+  .admin-layout { flex-direction: column; }
+  .admin-side { width: 100%; height: auto; position: static; flex-direction: row; align-items: center; overflow-x: auto; padding: 8px; }
+  .admin-logo { padding: 4px 8px; white-space: nowrap; }
+  .admin-nav { flex-direction: row; }
+  .admin-nav a { white-space: nowrap; }
+  .metric-grid, .chart-grid, .pricing-grid, .slots-grid2 { grid-template-columns: 1fr; }
+  .calc-card { position: static; }
+  .batch-bar { left: 0; }
+  .login-split { flex-direction: column; }
+  .login-brand { padding: 40px 24px; flex: none; }
+  .admin-content { padding: 16px; }
+  .tbl-wrap { overflow-x: auto; }
+  .admin-top { padding: 0 16px; }
+}
